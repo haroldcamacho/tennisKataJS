@@ -57,5 +57,15 @@ describe('TennisGame', function () {
         game.SetP2Score(3);
         assert.equal(game.getScore(),"Deuce");
     });
-    
+
+    it('It should return "Advantage player1" if player2 current points are "3" or more and player1 just scored to surpass player2 score', function () {
+        game.SetP1Score(4);
+        game.SetP2Score(3);
+        assert.equal(game.getScore(),"Advantage player1");
+    });  
+    it('It should return "Advantage player2" if player1 current points are "4" or more and player2 just scored to surpass player2 score', function () {
+        game.SetP1Score(3);
+        game.SetP2Score(4);
+        assert.equal(game.getScore(),"Advantage player2");
+    });  
 });

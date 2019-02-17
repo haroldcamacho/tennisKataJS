@@ -8,65 +8,6 @@ var TennisGame2 = function(player1Name, player2Name) {
     this.player1Name = player1Name;
     this.player2Name = player2Name;
 };
-
-TennisGame2.prototype.Player1IsWinning()=function(){
-    if (this.Player1CurrentPoints>this.Player2CurrentPoints)
-        return true;
-    return false; 
-}
-TennisGame2.prototype.Player2IsWinning()=function(){
-    if (this.Player2CurrentPoints>this.Player1CurrentPoints)
-        return true;
-    return false; 
-}
-
-TennisGame2.prototype.bothPlayersScoreIsTheSame()=function(){
-    if (this.Player2CurrentPoints===this.Player1CurrentPoints)
-        return true;
-    return false; 
-}
-
-TennisGame2.prototype.calculateResultIfThereIsADraw()=function(){
-    switch (this.Player1CurrentPoints) {
-        case value===1:
-            
-            break;
-    
-        default:
-            break;
-    }
-}
-
-TennisGame2.prototype.bothPlayersScoreIsTheSame()=function(){
-    if(this.Player2CurrentPoints===this.Player1CurrentPoints)
-        return true;
-    return false;
-}
-
-TennisGame2.prototype.bothPlayersScoreIsOne()=function(){
-    if(this.Player1CurrentPoints===1)
-        return true;
-    return false;
-}
-
-TennisGame2.prototype.bothPlayersScoreIsTwo()=function(){
-    
-}
-
-TennisGame2.prototype.bothPlayersScoreIsThree()=function(){
-    switch (this.Player1CurrentPoints) {
-        case (this.Player1CurrentPoints===1):
-                return "Fifteen"
-            break;
-        case (this.Player1CurrentPoints===1):
-                return "Thirty"
-            break;
-        default:
-            return 
-            break;
-    }
-}
-
 TennisGame2.prototype.getScore = function() {
     var score = "";
 
