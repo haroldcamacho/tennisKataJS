@@ -1,0 +1,22 @@
+{
+  "name": "TennisGame2",
+  "version": "1.0.0",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "test": "npm run && mocha --compilers js:babel-core/register",
+    "coverage": "nyc --reporter html --reporter text npm test"
+  },
+  "dependencies": {
+    "chai": "^4.2.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "nyc": "^13.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "coveralls": "^3.0.2"
+  }
+}
