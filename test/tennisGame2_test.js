@@ -24,4 +24,22 @@ describe('TennisGame', function () {
         game.SetP1Score(4);
         assert.equal(game.getScore(),"Win for player1");
     });
+
+    it('It should return "Love-Fifteen" if player2 scored', function () {
+        game.SetP2Score(1);
+        assert.equal(game.getScore(),"Love-Fifteen");
+    });
+    it('It should return "Love-Thirty" if player2 scored twice', function () {
+        game.SetP2Score(2);
+        assert.equal(game.getScore(),"Love-Thirty");
+    });
+    it('It should return "Love-Forty" if player2 scored three times', function () {
+        game.SetP2Score(3);
+        assert.equal(game.getScore(),"Love-Forty");
+    });
+    it('It should return "Win for player2" if player2 scored four times', function () {
+        game.SetP2Score(4);
+        assert.equal(game.getScore(),"Win for player2");
+    });
+    
 });
