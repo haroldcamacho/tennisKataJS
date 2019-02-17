@@ -41,5 +41,21 @@ describe('TennisGame', function () {
         game.SetP2Score(4);
         assert.equal(game.getScore(),"Win for player2");
     });
+
+    it('It should return "Fifteen-All" if both player1 and player2 scored once', function () {
+        game.SetP1Score(1);
+        game.SetP2Score(1);
+        assert.equal(game.getScore(),"Fifteen-All");
+    });
+    it('It should return "Thirty-All" if both player1 and player2 scored twice', function () {
+        game.SetP1Score(2);
+        game.SetP2Score(2);
+        assert.equal(game.getScore(),"Thirty-All");
+    });
+    it('It should return "Deuce" if both player1 and player2 scored three times', function () {
+        game.SetP1Score(3);
+        game.SetP2Score(3);
+        assert.equal(game.getScore(),"Deuce");
+    });
     
 });
