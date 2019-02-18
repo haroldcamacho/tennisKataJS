@@ -9,14 +9,34 @@ var TennisGame2 = function(player1Name, player2Name) {
     this.player2Name = player2Name;
 };
 
+TennisGame2.prototype.getScore = function() {
+    let score = "";
 
-TennisGame2.prototype.checkIfScoresAreTied=function(){
+    if(this.checkIfPlayerPointsAreTied()){
+        score=this.calculateScoreForTiedPoints();
+    }
+    else if(this.checkIfAnyPlayerHasTheAdvantage()){
+        score=this.calculateResultForWhichPlayerHasTheAdvantage();
+    }
+    else{
+        score=this.calculateScoreIfPointsAreNotTied();
+    }
+    if (this.Player1CurrentPoints >= 4 && this.Player2CurrentPoints >= 0 && (this.Player1CurrentPoints - this.Player2CurrentPoints) >= 2) {
+        score = "Win for player1";
+    }
+    if (this.Player2CurrentPoints >= 4 && this.Player1CurrentPoints >= 0 && (this.Player2CurrentPoints - this.Player1CurrentPoints) >= 2) {
+        score = "Win for player2";
+    }
+    return score;
+};
+
+TennisGame2.prototype.checkIfPlayerPointsAreTied=function(){
     if (this.Player2CurrentPoints===this.Player1CurrentPoints)
         return true;
     return false; 
 };
 
-TennisGame2.prototype.calculateResultIfThereIsATie=function(){
+TennisGame2.prototype.calculateScoreForTiedPoints=function(){
     let result;
     switch (this.Player1CurrentPoints) {
         case 1:
@@ -54,36 +74,46 @@ TennisGame2.prototype.calculateResultFromTheScore=function(score){
     return result;
 };
 
-TennisGame2.prototype.calculateResultIfScoresAreNotTied = function(){
+
+
+TennisGame2.prototype.calculateScoreIfPointsAreNotTied = function(){
     let result1=this.calculateResultFromTheScore(this.Player1CurrentPoints);
     let result2=this.calculateResultFromTheScore(this.Player2CurrentPoints);
     return result1+"-"+result2;
-}
+};
 
-TennisGame2.prototype.getScore = function() {
-    let score = "";
+TennisGame2.prototype.checkIfPlayer1IsWinning = function(){
+    if (this.Player1CurrentPoints>this.Player2CurrentPoints)
+        return true;
+    return false; 
+};
 
-    if(this.checkIfScoresAreTied()){
-        score=this.calculateResultIfThereIsATie();
-    }
-    else{
-        score=this.calculateResultIfScoresAreNotTied();
-    }
-    if (this.Player1CurrentPoints > this.Player2CurrentPoints && this.Player2CurrentPoints >= 3) {
-        score = "Advantage player1";
-    }
+TennisGame2.prototype.checkIfPlayer2IsWinning = function(){
+    if (this.Player2CurrentPoints>this.Player1CurrentPoints)
+        return true;
+    return false; 
+};
 
-    if (this.Player2CurrentPoints > this.Player1CurrentPoints && this.Player1CurrentPoints >= 3) {
-        score = "Advantage player2";
+TennisGame2.prototype.checkIfAnyPlayerHasTheAdvantage = function(){
+    let result=false;
+    if(this.checkIfPlayer1IsWinning()&&this.Player2CurrentPoints >= 3){
+        result = true;
     }
+    if(this.checkIfPlayer2IsWinning()&&this.Player1CurrentPoints >= 3){
+        result = true;
+    }
+    return result;
+};
 
-    if (this.Player1CurrentPoints >= 4 && this.Player2CurrentPoints >= 0 && (this.Player1CurrentPoints - this.Player2CurrentPoints) >= 2) {
-        score = "Win for player1";
+TennisGame2.prototype.calculateResultForWhichPlayerHasTheAdvantage = function(){
+    let advantage;
+    if(this.checkIfPlayer1IsWinning()){
+        advantage = "Advantage player1";
     }
-    if (this.Player2CurrentPoints >= 4 && this.Player1CurrentPoints >= 0 && (this.Player2CurrentPoints - this.Player1CurrentPoints) >= 2) {
-        score = "Win for player2";
+    if(this.checkIfPlayer2IsWinning()){
+        advantage = "Advantage player2";
     }
-    return score;
+    return advantage;
 };
 
 TennisGame2.prototype.SetP1Score = function(number) {
