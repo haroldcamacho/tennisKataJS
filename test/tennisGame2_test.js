@@ -33,7 +33,7 @@ describe('TennisGame', function () {
         game.SetP2Score(2);
         assert.equal(game.getScore(),"Love-Thirty");
     });
-    it('It should return "Love-Forty" if player2 scored three times', function () {
+    it('It should return "Love-Forty" if player2 scored thrice', function () {
         game.SetP2Score(3);
         assert.equal(game.getScore(),"Love-Forty");
     });
@@ -68,4 +68,47 @@ describe('TennisGame', function () {
         game.SetP2Score(4);
         assert.equal(game.getScore(),"Advantage player2");
     });  
+
+    it('It should return "Advantage player2" if player1 current points are "4" or more and player2 just scored to surpass player2 score', function () {
+        game.SetP1Score(3);
+        game.SetP2Score(4);
+        assert.equal(game.getScore(),"Advantage player2");
+    });  
+
+    it('It should return "Fifteen-Thirty" if player2 scored twice and player1 scored once', function () {
+        game.SetP2Score(2);
+        game.SetP1Score(1);
+        assert.equal(game.getScore(),"Fifteen-Thirty");
+    });
+    
+    it('It should return "Fifteen-Forty" if player2 scored thrice and player1 scored once', function () {
+        game.SetP2Score(3);
+        game.SetP1Score(1);
+        assert.equal(game.getScore(),"Fifteen-Forty");
+    });
+
+    it('It should return "Thirty-Forty" if player2 scored thrice and player1 scored twice', function () {
+        game.SetP2Score(3);
+        game.SetP1Score(2);
+        assert.equal(game.getScore(),"Thirty-Forty");
+    });
+    
+
+    it('It should return "Thirty-Fifteen" if player1 scored twice and player2 scored once', function () {
+        game.SetP2Score(1);
+        game.SetP1Score(2);
+        assert.equal(game.getScore(),"Thirty-Fifteen");
+    });
+    
+    it('It should return "Forty-Fifteen" if player1 scored thrice and player2 scored once', function () {
+        game.SetP2Score(1);
+        game.SetP1Score(3);
+        assert.equal(game.getScore(),"Forty-Fifteen");
+    });
+
+    it('It should return "Forty-Thirty" if player1 scored thrice and player2 scored twice', function () {
+        game.SetP2Score(2);
+        game.SetP1Score(3);
+        assert.equal(game.getScore(),"Forty-Thirty");
+    });
 });
