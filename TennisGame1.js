@@ -12,7 +12,7 @@ TennisGame1.prototype.wonPoint = function(playerName) {
         this.m_score2 += 1;
 };
 
-TennisGame1.prototype.getScore = function() {
+TennisGame1.prototype.calculateCurrentGameScore = function() {
     var score = "";
     var tempScore = 0;
     if (this.m_score1 === this.m_score2) {

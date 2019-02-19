@@ -67,7 +67,7 @@ var checkScore = function(reporter, TennisGame, player1Score, player2Score, expe
                 game.wonPoint("player2");
             }
         }
-        result = game.getScore();
+        result = game.calculateCurrentGameScore();
 
         if (result === expectedScore) {
             ok = true;

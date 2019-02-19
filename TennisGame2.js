@@ -9,32 +9,25 @@ var TennisGame2 = function(player1Name, player2Name) {
     this.player2Name = player2Name;
 };
 
-TennisGame2.prototype.getScore = function() {
+TennisGame2.prototype.calculateCurrentGameScore = function() {
     let score = "";
-
-    if(this.checkIfPlayerPointsAreTied()){
-        score=this.calculateScoreForTiedPoints();
-    }
-    else if(this.checkIfAnyPlayerHasTheAdvantage()){
-        score=this.calculateResultForWhichPlayerHasTheAdvantage();
+    if(this.checkIfAnyPlayerHasWon()){
+        score=this.calculateWhichPlayerWon();
     }
     else{
-        score=this.calculateScoreIfPointsAreNotTied();
-    }
-    if (this.Player1CurrentPoints >= 4 && this.Player2CurrentPoints >= 0 && (this.Player1CurrentPoints - this.Player2CurrentPoints) >= 2) {
-        score = "Win for player1";
-    }
-    if (this.Player2CurrentPoints >= 4 && this.Player1CurrentPoints >= 0 && (this.Player2CurrentPoints - this.Player1CurrentPoints) >= 2) {
-        score = "Win for player2";
+        if(this.checkIfPlayerPointsAreTied()){
+            score=this.calculateScoreForTiedPoints();
+        }
+        else if(this.checkIfAnyPlayerHasTheAdvantage()){
+            score=this.calculateResultForWhichPlayerHasTheAdvantage();
+        }
+        else{
+            score=this.calculateScoreIfPointsAreNotTied();
+        }
     }
     return score;
 };
 
-TennisGame2.prototype.checkIfPlayerPointsAreTied=function(){
-    if (this.Player2CurrentPoints===this.Player1CurrentPoints)
-        return true;
-    return false; 
-};
 
 TennisGame2.prototype.calculateScoreForTiedPoints=function(){
     let result;
@@ -72,6 +65,42 @@ TennisGame2.prototype.calculateResultFromTheScore=function(score){
             break;
     }
     return result;
+};
+
+
+TennisGame2.prototype.checkIfAnyPlayerHasWon=function(){
+    let winner=false;
+    if (this.Player1CurrentPoints >= 4 && this.checkIfTheDifferenceBetweenPointsIsGreaterOrEqualToTwo()) {
+        winner = true;
+    }
+    if (this.Player2CurrentPoints >= 4 &&this.checkIfTheDifferenceBetweenPointsIsGreaterOrEqualToTwo()) {
+        winner = true;
+    }
+    return winner;
+};
+
+TennisGame2.prototype.calculateWhichPlayerWon=function(){
+    let result;
+    if (this.Player1CurrentPoints >= 4 ) {
+        result = "Win for player1";
+    }
+   else {
+        result = "Win for player2";
+    }
+    return result;
+};
+
+TennisGame2.prototype.checkIfTheDifferenceBetweenPointsIsGreaterOrEqualToTwo=function () {
+     if(Math.abs(this.Player1CurrentPoints - this.Player2CurrentPoints)>=2)
+        return true;
+    else
+        return false;
+};
+
+TennisGame2.prototype.checkIfPlayerPointsAreTied=function(){
+    if (this.Player2CurrentPoints===this.Player1CurrentPoints)
+        return true;
+    return false; 
 };
 
 
@@ -116,33 +145,27 @@ TennisGame2.prototype.calculateResultForWhichPlayerHasTheAdvantage = function(){
     return advantage;
 };
 
-TennisGame2.prototype.SetP1Score = function(number) {
-    var i;
-    for (i = 0; i < number; i++) {
-        this.P1Score();
-    }
+TennisGame2.prototype.changeP1PointsToAnSpecificValue = function(number) {
+    this.Player1CurrentPoints+=number;
 };
 
-TennisGame2.prototype.SetP2Score = function(number) {
-    var i;
-    for (i = 0; i < number; i++) {
-        this.P2Score();
-    }
+TennisGame2.prototype.changeP2PointsToAnSpecificValue = function(number) {
+   this.Player2CurrentPoints+=number;
 };
 
-TennisGame2.prototype.P1Score = function() {
+TennisGame2.prototype.increaseP1PointsByOne = function() {
     this.Player1CurrentPoints++;
 };
 
-TennisGame2.prototype.P2Score = function() {
+TennisGame2.prototype.increaseP2PointsByOne = function() {
     this.Player2CurrentPoints++;
 };
 
-TennisGame2.prototype.wonPoint = function(player) {
+TennisGame2.prototype.increaseThePointsOfAnyPlayerByOne = function(player) {
     if (player === "player1")
-        this.P1Score();
+        this.increaseP1PointsByOne();
     else
-        this.P2Score();
+        this.increaseP2PointsByOne();
 };
 
 if (typeof window === "undefined") {
